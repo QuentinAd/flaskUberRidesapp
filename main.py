@@ -72,7 +72,7 @@ app.layout = html.Div(
                         ),
                         html.H2("Dashboard"),
                         html.P(
-                            """Select different days using the date picker or by selecting
+                            """Select a date below or by selecting
                             different time frames on the histogram."""
                         ),
                         html.Div(
@@ -121,7 +121,7 @@ app.layout = html.Div(
                                                 for n in range(24)
                                             ],
                                             multi=True,
-                                            placeholder="Select certain hours",
+                                            placeholder="Select a time range",
                                         )
                                     ],
                                 ),
@@ -303,7 +303,7 @@ def update_histogram(datePicked, selection):
         bargap=0.01,
         bargroupgap=0,
         barmode="group",
-        margin=go.layout.Margin(l=10, r=0, t=0, b=50),
+        margin=go.layout.Margin(l=7, r=1, t=0, b=50),
         showlegend=False,
         plot_bgcolor="#323130",
         paper_bgcolor="#323130",
@@ -381,13 +381,13 @@ def getLatLonColor(selectedData, month, day):
     ],
 )
 def update_graph(datePicked, selectedData, selectedLocation):
-    zoom = 12.0
+    zoom = 10.0
     latInitial = 40.7272
     lonInitial = -73.991251
     bearing = 0
 
     if selectedLocation:
-        zoom = 15.0
+        zoom = 14.0
         latInitial = list_of_locations[selectedLocation]["lat"]
         lonInitial = list_of_locations[selectedLocation]["lon"]
 
@@ -403,13 +403,13 @@ def update_graph(datePicked, selectedData, selectedLocation):
                 lat=listCoords["Lat"],
                 lon=listCoords["Lon"],
                 mode="markers",
-                hoverinfo="lat+lon+text",
+                hoverinfo="text",
                 text=listCoords.index.hour,
                 marker=dict(
                     showscale=True,
                     color=np.append(np.insert(listCoords.index.hour, 0, 0), 23),
-                    opacity=0.5,
-                    size=5,
+                    opacity=0.45,
+                    size=4,
                     colorscale=[
                         [0, "#F4EC15"],
                         [0.04167, "#DAF017"],
@@ -430,7 +430,7 @@ def update_graph(datePicked, selectedData, selectedLocation):
                     ],
                     colorbar=dict(
                         title="Time of<br>Day",
-                        x=0.93,
+                        x=0.95,
                         xpad=0,
                         nticks=24,
                         tickfont=dict(color="#d8d8d8"),
@@ -483,8 +483,8 @@ def update_graph(datePicked, selectedData, selectedLocation):
                     pad={"r": 0, "t": 0, "b": 0, "l": 0},
                     showactive=False,
                     type="buttons",
-                    x=0.45,
-                    y=0.02,
+                    x=0.5,
+                    y=0.01,
                     xanchor="left",
                     yanchor="bottom",
                     bgcolor="#323130",
