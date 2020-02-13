@@ -68,9 +68,9 @@ app.layout = html.Div(
                     className="four columns div-user-controls",
                     children=[
                         html.Img(
-                            className="logo", src=app.get_asset_url("dash-logo-new.png")
+                            className="logo", src=app.get_asset_url("micro_white.png")
                         ),
-                        html.H2("DASH - UBER DATA APP"),
+                        html.H2("Dashboard"),
                         html.P(
                             """Select different days using the date picker or by selecting
                             different time frames on the histogram."""
