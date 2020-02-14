@@ -72,8 +72,7 @@ app.layout = html.Div(
                         ),
                         html.H2("Dashboard"),
                         html.P(
-                            """Select a date below or by selecting
-                            different time frames on the histogram."""
+                            """New York City area Uber rides taken in 2014."""
                         ),
                         html.Div(
                             className="div-for-dropdown",
