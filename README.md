@@ -1,8 +1,10 @@
 # Dash Uber Rides Demo
 
+Currently hosted on Azure at https://azureflaskwebapp.azurewebsites.net/
+
 ## About this app
 
-This is a demo of the Dash interactive Python framework developed by [Plotly](https://plot.ly/).
+This is a demo of the Dash interactive Python with the core framework by [Plotly](https://plot.ly/).
 
 ## How to run this app
 
