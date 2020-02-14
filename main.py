@@ -131,7 +131,7 @@ app.layout = html.Div(
                         html.P(id="date-value"),
                         dcc.Markdown(
                             children=[
-                                "Source: [FiveThirtyEight](https://github.com/fivethirtyeight/uber-tlc-foil-response/tree/master/uber-trip-data)"
+                                "Data source: [FiveThirtyEight](https://github.com/fivethirtyeight/uber-tlc-foil-response/tree/master/uber-trip-data)"
                             ]
                         ),
                     ],
@@ -245,45 +245,47 @@ def update_total_rides(datePicked):
     [Output("total-rides-selection", "children"), Output("date-value", "children")],
     [Input("date-picker", "date"), Input("bar-selector", "value")],
 )
-def update_total_rides_selection(datePicked, selection):
-    firstOutput = ""
+### The following function is commented out because it is just adding redundent information about previous selections
+### thus slowing down the app.
 
-    if selection is not None or len(selection) is not 0:
-        date_picked = dt.strptime(datePicked, "%Y-%m-%d")
-        totalInSelection = 0
-        for x in selection:
-            totalInSelection += len(
-                totalList[date_picked.month - 4][date_picked.day - 1][
-                    totalList[date_picked.month - 4][date_picked.day - 1].index.hour
-                    == int(x)
-                ]
-            )
-        firstOutput = "Total rides in selection: {:,d}".format(totalInSelection)
+# def update_total_rides_selection(datePicked, selection):
+#     firstOutput = ""
 
-    if (
-        datePicked is None
-        or selection is None
-        or len(selection) is 24
-        or len(selection) is 0
-    ):
-        return firstOutput, (datePicked, " - showing hour(s): All")
+#     if selection is not None or len(selection) is not 0:
+#         date_picked = dt.strptime(datePicked, "%Y-%m-%d")
+#         totalInSelection = 0
+#         for x in selection:
+#             totalInSelection += len(
+#                 totalList[date_picked.month - 4][date_picked.day - 1][
+#                     totalList[date_picked.month - 4][date_picked.day - 1].index.hour
+#                     == int(x)
+#                 ]
+#             )
+#         firstOutput = "Total rides in selection: {:,d}".format(totalInSelection)
 
-    holder = sorted([int(x) for x in selection])
+#     if (
+#         datePicked is None
+#         or selection is None
+#         or len(selection) is 24
+#         or len(selection) is 0
+#     ):
+#         return firstOutput, (datePicked, " - showing hour(s): All")
 
-    if holder == list(range(min(holder), max(holder) + 1)):
-        return (
-            firstOutput,
-            (
-                datePicked,
-                " - showing hour(s): ",
-                holder[0],
-                "-",
-                holder[len(holder) - 1],
-            ),
-        )
+#     holder = sorted([int(x) for x in selection])
 
-    holder_to_string = ", ".join(str(x) for x in holder)
-    return firstOutput, (datePicked, " - showing hour(s): ", holder_to_string)
+#     if holder == list(range(min(holder), max(holder) + 1)):
+#         return (
+#             firstOutput,
+#             (
+#                 datePicked,
+#                 " - showing hour(s): ",
+#                 holder[0],
+#                 "-",
+#                 holder[len(holder) - 1],
+#             ),
+#         )
+
+#     return firstOutput, (datePicked, " - showing hour(s): ", holder_to_string)
 
 
 # Update Histogram Figure based on Month, Day and Times Chosen
