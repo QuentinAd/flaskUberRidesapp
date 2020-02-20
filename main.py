@@ -242,50 +242,49 @@ def update_total_rides(datePicked):
 
 # Update the total number of rides in selected times
 @app.callback(
-    [Output("total-rides-selection", "children"), Output("date-value", "children")],
+    [Output("total-rides-selection", "children"), Output("date-value","children")],
     [Input("date-picker", "date"), Input("bar-selector", "value")],
 )
-### The following function is commented out because it is just adding redundent information about previous selections
-### thus slowing down the app.
 
-# def update_total_rides_selection(datePicked, selection):
-#     firstOutput = ""
 
-#     if selection is not None or len(selection) is not 0:
-#         date_picked = dt.strptime(datePicked, "%Y-%m-%d")
-#         totalInSelection = 0
-#         for x in selection:
-#             totalInSelection += len(
-#                 totalList[date_picked.month - 4][date_picked.day - 1][
-#                     totalList[date_picked.month - 4][date_picked.day - 1].index.hour
-#                     == int(x)
-#                 ]
-#             )
-#         firstOutput = "Total rides in selection: {:,d}".format(totalInSelection)
+def update_total_rides_selection(datePicked, selection):
+    firstOutput = ""
 
-#     if (
-#         datePicked is None
-#         or selection is None
-#         or len(selection) is 24
-#         or len(selection) is 0
-#     ):
-#         return firstOutput, (datePicked, " - showing hour(s): All")
+    if selection is not None or len(selection) is not 0:
+        date_picked = dt.strptime(datePicked, "%Y-%m-%d")
+        totalInSelection = 0
+        for x in selection:
+            totalInSelection += len(
+                totalList[date_picked.month - 4][date_picked.day - 1][
+                    totalList[date_picked.month - 4][date_picked.day - 1].index.hour
+                    == int(x)
+                ]
+            )
+        firstOutput = "Total rides in selection: {:,d}".format(totalInSelection)
 
-#     holder = sorted([int(x) for x in selection])
+    if (
+        datePicked is None
+        or selection is None
+        or len(selection) is 24
+        or len(selection) is 0
+    ):
+        return firstOutput, (datePicked, " - showing hour(s): All")
 
-#     if holder == list(range(min(holder), max(holder) + 1)):
-#         return (
-#             firstOutput,
-#             (
-#                 datePicked,
-#                 " - showing hour(s): ",
-#                 holder[0],
-#                 "-",
-#                 holder[len(holder) - 1],
-#             ),
-#         )
+    holder = sorted([int(x) for x in selection])
 
-#     return firstOutput, (datePicked, " - showing hour(s): ", holder_to_string)
+    if holder == list(range(min(holder), max(holder) + 1)):
+        return (
+            firstOutput,
+            (
+                datePicked,
+                " - showing hour(s): ",
+                holder[0],
+                "-",
+                holder[len(holder) - 1],
+            ),
+        )
+
+    return firstOutput, (datePicked, " - showing hour(s): ")
 
 
 # Update Histogram Figure based on Month, Day and Times Chosen
@@ -341,7 +340,7 @@ def update_histogram(datePicked, selection):
 
     return go.Figure(
         data=[
-            go.Bar(x=xVal, y=yVal, marker=dict(color=colorVal), hoverinfo="x"),
+            go.Bar(x=xVal, y=yVal, marker=dict(color=colorVal), hoverinfo='none'),
             go.Scatter(
                 opacity=0,
                 x=xVal,
@@ -404,7 +403,7 @@ def update_graph(datePicked, selectedData, selectedLocation):
                 lat=listCoords["Lat"],
                 lon=listCoords["Lon"],
                 mode="markers",
-                hoverinfo="text",
+                hoverinfo="none",
                 text=listCoords.index.hour,
                 marker=dict(
                     showscale=True,
@@ -468,11 +467,11 @@ def update_graph(datePicked, selectedData, selectedLocation):
                             dict(
                                 args=[
                                     {
-                                        "mapbox.zoom": 12,
+                                        "mapbox.zoom": 11,
                                         "mapbox.center.lon": "-73.991251",
                                         "mapbox.center.lat": "40.7272",
                                         "mapbox.bearing": 0,
-                                        "mapbox.style": "dark",
+                                        "mapbox.style": "light",
                                     }
                                 ],
                                 label="Reset Zoom",
