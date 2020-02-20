@@ -68,11 +68,11 @@ app.layout = html.Div(
                     className="four columns div-user-controls",
                     children=[
                         html.Img(
-                            className="logo", src=app.get_asset_url("micro_white.png")
+                            className="logo", src=app.get_asset_url("socialglass.png")
                         ),
-                        html.H2("Dashboard"),
+                        html.H2("DASHBOARD"),
                         html.P(
-                            """New York City area Uber rides taken in 2014."""
+                            """Template Only"""
                         ),
                         html.Div(
                             className="div-for-dropdown",
@@ -131,7 +131,7 @@ app.layout = html.Div(
                         html.P(id="date-value"),
                         dcc.Markdown(
                             children=[
-                                "Data source: [FiveThirtyEight](https://github.com/fivethirtyeight/uber-tlc-foil-response/tree/master/uber-trip-data)"
+                                ""
                             ]
                         ),
                     ],
@@ -235,7 +235,7 @@ def update_selected_data(clickData):
 @app.callback(Output("total-rides", "children"), [Input("date-picker", "date")])
 def update_total_rides(datePicked):
     date_picked = dt.strptime(datePicked, "%Y-%m-%d")
-    return "Total Number of rides: {:,d}".format(
+    return "Total Numbers: {:,d}".format(
         len(totalList[date_picked.month - 4][date_picked.day - 1])
     )
 
@@ -260,7 +260,7 @@ def update_total_rides_selection(datePicked, selection):
                     == int(x)
                 ]
             )
-        firstOutput = "Total rides in selection: {:,d}".format(totalInSelection)
+        firstOutput = "Numbers in selection: {:,d}".format(totalInSelection)
 
     if (
         datePicked is None
